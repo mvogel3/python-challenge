@@ -9,7 +9,6 @@ total_sum = 0
 previous_value = 0
 revenue_change = []
 
-# change = 0
 max_profit = 0
 min_profit = 0
 
@@ -29,7 +28,6 @@ with open(file_path) as file:
         print(f"value next iteration {previous_value}")
         print(current_value) #second value in the list
         total_sum = total_sum + current_value #allows the second value in each list to be read as an integer and added to total_sum
-        print(type(revenue_change))
 
         if previous_value !=0:
             change = current_value - previous_value
@@ -43,19 +41,9 @@ with open(file_path) as file:
                 min_profit = change
                 min_month = row[0]
             print(f"min profit = {min_profit}")
-        # print(f"the new value for change = {change}")
-        # else: 
-            # revenue_change.append(current_value)
-        # print("outside conditional")
         previous_value = current_value
-        # print(previous_value)
         
 average_change = sum(revenue_change) / len(revenue_change)
-        #print(f"value next {total_sum}") # value after the for loop is complete
-print(month_count)
-print(total_sum)
-# print(revenue_change)
-print(average_change)
 
 print("Financial Analysis")
 print("----------------------------")
