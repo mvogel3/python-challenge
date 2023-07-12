@@ -19,13 +19,10 @@ with open(file_path) as file:
     candidate_name = []
     total_count = []
     percent_votes = []
+    candidate_list = []
 
     win_candidate = 0
-    results = 0
-    i = 0
-    loop2 = 0
-    loop3 = 0
-    loop4 = 0
+    results = []
 
     for row in csvreader:
         vote_count = vote_count + 1
@@ -37,28 +34,57 @@ with open(file_path) as file:
         candidate_name.append(candidate)
         # if candidate in candidate_name:
         #     print(candidate)
+    # print(vote_count)
+    # print(candidate_name)
 
-# candidate_name.append(candidate[0])
-candidate_len = len(ballot_id)
-for i in range(candidate_len - 1):
-    if candidate[i + 1] != candidate[i] and candidate[i + 1] not in candidate_name:
-        candidate_name.append(candidate[i + 1])
+    candidate_list.append(candidate_name[0])
+    candidate_len = len(ballot_id)
+    # print(candidate)
+    # print(candidate_name)
 
-n = len(candidate_name)
+    for c in candidate_name:
+        if c not in candidate_list:
+            candidate_list.append(c)
+    print(candidate_list)
 
-for loop2 in range(n):
-    total_count.append(candidate_name.count(candidate_name[loop2]))
+    n = len(candidate_list)
 
-
-for loop3 in range(n):
-    percent_votes.append(f"{round((total_count[loop3]/candidate_len*100), 3)}%")
-    if total_count[loop3] > win_candidate:
-        winner = candidate_name[loop3]
-        win_candidate = total_count[loop3]
-
-for loop4 in range(n):
-    results.append(f"{candidate_name[loop4]}: {percent_votes[loop4]} ({total_count[loop4]})")
+    for loop2 in range(n):
+        total_count.append(candidate_name.count(candidate_list[loop2]))
+    print(total_count)
 
 
+    for loop3 in range(n):
+        percent_votes.append(f"{round((total_count[loop3]/candidate_len*100), 3)}%")
+        if total_count[loop3] > win_candidate:
+            winner = candidate_list[loop3]
+            win_candidate = total_count[loop3]
+    print(winner)
 
-print(vote_count)
+    for loop4 in range(n):
+        results.append(f"{candidate_list[loop4]}: {percent_votes[loop4]} ({total_count[loop4]})")
+    print(results)
+
+    candidate_results = '\n'.join(results)
+
+
+analysis = f'\
+Election Results\n\
+----------------------------\n\
+Total Votes: {vote_count}\n\
+----------------------------\n\
+{candidate_results}\n\
+----------------------------\n\
+Winner: {winner}\n\
+----------------------------\n'
+
+print(analysis)
+output = open('pypoll.txt', 'w')
+output.writelines(analysis)
+output.close()
+
+# for r in results:
+#     print(r)
+# print("----------------------------")
+# print(f"Winner: {winner}")
+# print("----------------------------")

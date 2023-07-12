@@ -52,3 +52,17 @@ print(f"Total: ${total_sum}")
 print(f"Average Change: ${average_change:.2f}")
 print(f"Greatest Increase in Profits: {max_month} (${max_profit})")
 print(f"Greatest Decrease in Profits: {min_month} (${min_profit})")
+
+analysis = f'\
+Financial Analysis\n\
+----------------------------\n\
+Total Months: {month_count}\n\
+Total: ${total_sum}\n\
+Average Change: ${average_change:.2f}\n\
+Greatest Increase in Profits: {max_month} (${max_profit})\n\
+Greatest Decrease in Profits: {min_month} (${min_profit})\n'
+
+print(analysis)
+output = open('pybank.txt', 'w')
+output.writelines(analysis)
+output.close()
